@@ -1,0 +1,6 @@
+INSERT INTO job_applications (app_id, user_id, job_name, company, job_link, app_status, created_at)
+VALUES (2, 'User1', 'Software Engineer', 'Comp1', 'https://www.example.com/job1/software-engineer', 'Not Submitted', CURRENT_TIMESTAMP);
+
+
+INSERT INTO job_application_details (app_id, job_content)
+VALUES (2, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt augue nulla, sit amet tempor lorem lobortis nec. Nam molestie augue ac ex ullamcorper eleifend. Sed suscipit posuere est, vel dignissim quam.');
