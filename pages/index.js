@@ -21,8 +21,12 @@ export default function Home() {
         </div>
 
         <div className={styles.grid}>
-          <Link href="/example" className={styles.card}>
+        <Link href="/example" className={styles.card}>
             Example...
+          </Link>          
+          
+          <Link href="/apitester" className={styles.card}>
+            API TESTER
           </Link>
 
           <a href="https://nextjs.org/docs" className={styles.card}>

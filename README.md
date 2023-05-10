@@ -9,9 +9,10 @@ Note- query string is used by the SQL statement
 
 TODO-
 
-Build Mock API on Next.js
-Build minimal frontend that uses all API features
-Build out REST API on OracleDB
+Finish REST API
+
+Enforce userID simplicity
+
 Map Mock API to OracleDB API using Next.js API Routes
 
 Deploy

@@ -51,15 +51,48 @@ export default async function handler(req, res) {
 
             const resBody = await response.json(); // or res.text(), res.blob(), etc.
 
-            console.log(resBody)
+        
+            const headers = {};
+            response.headers.forEach((value, key) => {
+              headers[key] = value;
+            });
 
             res.status(response.status).json(resBody);
         }
     
     
         //if req is  PUT
-        // PUT /applications/{app_id}
+        // PUT /applications/{user_id}/{app_id}
     
+
+        if(req.method === 'PUT'){
+            let [user_id, app_id] = req.query.params
+            let url = `https://g1a0971b56a7dae-jobappdb.adb.us-phoenix-1.oraclecloudapps.com/ords/admin/jobapi/applications/${user_id}/${app_id}`
+
+
+            const requestBody = req.body;
+
+            // console.log("\n\n\n ", requestBody, `-${app_id}-`)
+
+
+            const response = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+              })
+            .catch(error => {
+                console.error('Error:', error);
+              }
+            );
+
+            const resBody = await response.blob(); // or res.text(), res.blob(), etc.
+            
+
+            res.status(response.status).blob(resBody);
+        }
+
         // This endpoint updates an existing job application in the database.
         // Request body should contain the updated data: job_name, company_name, job_desc, job_link, app_status.
         // The user_id is taken from the authentication token to ensure that the user can only update their own job applications.
@@ -67,7 +100,23 @@ export default async function handler(req, res) {
     
         //if req is DELETE
     
-        // DELETE /applications/{app_id}
+        // DELETE /applications/userid/{app_id}
+
+        if(req.method === 'DELETE'){
+            let [user_id, app_id] = req.query.params
+            let url = `https://g1a0971b56a7dae-jobappdb.adb.us-phoenix-1.oraclecloudapps.com/ords/admin/jobapi/applications/${user_id}/${app_id}`
+
+            const response = await fetch(url, {
+                method: 'DELETE',
+              })
+            .catch(error => {
+                console.error('Error:', error);
+              }
+            );            
+
+            res.status(response.status).send();
+        }
+
     
         // This endpoint deletes a specific job application from the database.
         // The user_id is taken from the authentication token to ensure that the user can only delete their own job applications.
