@@ -4,15 +4,15 @@ export default function TodoList(){
 
     const [listItems, setListItems] = useState(testData)
 
-    function handleListAdd() {
+    function handleListAdd(newItem) {
         setListItems((prevListItems) => {
-            const newItem = {
-                id: prevListItems.length,
-                title: `title ${prevListItems.length}`,
-                description: 'description',
-                timestamp: 'timestamp',
-                isdone: true
-            }
+            // const newItem = {
+            //     id: prevListItems.length,
+            //     title: `title ${prevListItems.length}`,
+            //     description: 'description',
+            //     timestamp: 'timestamp',
+            //     isdone: true
+            // }
             return [...prevListItems, newItem];
         })
     }
@@ -31,7 +31,7 @@ export default function TodoList(){
 
     return(
         <>
-            <TodoItemAdder itemAdder={handleListAdd}/>
+            <TodoItemAdder itemAdder={handleListAdd} numItemsInList={listItemsAsElements.length}/>
             <ul>{listItemsAsElements}</ul>
         </> 
         
@@ -39,12 +39,41 @@ export default function TodoList(){
 
 }
 
-function TodoItemAdder({itemAdder}){
+function TodoItemAdder({itemAdder, numItemsInList}){
+    const [itemTitle, setItemTitle] = useState('')
+    const [itemDesc, setItemDesc] = useState('')
+
+    let newItem = {
+        id: numItemsInList,
+        title: itemTitle,
+        description: itemDesc,
+        timestamp: 'timestamp2',
+        isdone: true
+    }
+
+    const handleChange = (event) => {
+        setItemTitle(event.target.value)
+    }
+
     return(
         <>
-        <input id="title"></input>
-        <input id="description"></input>
-            <button onClick={itemAdder}>ADD ITEM</button>
+            <input 
+                id="title"
+                value={itemTitle}
+                onChange={
+                    (event) => {
+                        setItemTitle(event.target.value) 
+                    }
+                }></input>
+            <input 
+                id="description"
+                value={itemDesc}
+                onChange={
+                    (event) => {
+                        setItemDesc(event.target.value) 
+                    }
+                }></input>
+            <button onClick={() => {itemAdder(newItem)}}>ADD ITEM</button>
         </>
     )
 }
@@ -59,19 +88,30 @@ function TodoItemContainer({item}){
 
 function TodoItem({item}){
     const isDone = item.isdone
+    const editMode = false
+
+    function setEditMode(f){
+        console.log('f')
+        f('asdf')
+    }
     return(
         <div>
-            {item.title}, 
+            {
+                editMode ? 
+                <span>edit mode true</span> :
+                <span>edit mode false</span>
+            }, 
             {item.description}, 
             {item.timestamp}
-            <EditButton/>
+            <EditButton setEditModeHandler={setEditMode}/>
             <DeleteButton/>
             <SetIsDoneButton/>
         </div>
     )
 }
 
-function EditButton(){
+function EditButton({setEditModeHandler}){
+    setEditModeHandler(console.log)
     return(
         <button>Edit</button>
     )
