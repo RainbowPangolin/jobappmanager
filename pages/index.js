@@ -29,6 +29,11 @@ export default function Home() {
             API TESTER
           </Link>
 
+
+          <Link href="/mainPage" className={styles.card}>
+            MAIN APP
+          </Link>
+
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h3>Documentation &rarr;</h3>
             <p>Find in-depth information about Next.js features and API.</p>
