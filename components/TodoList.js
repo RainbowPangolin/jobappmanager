@@ -87,33 +87,46 @@ function TodoItemContainer({item}){
 }
 
 function TodoItem({item}){
-    const isDone = item.isdone
-    const editMode = false
+    const isDone = item.isdone;
+    const editMode = true;
 
     function setEditMode(f){
         console.log('f')
         f('asdf')
     }
     return(
-        <div>
+        <>
             {
                 editMode ? 
-                <span>edit mode true</span> :
-                <span>edit mode false</span>
-            }, 
+                <EditItemField/>:
+                <span>item.description</span>
+            }
             {item.description}, 
             {item.timestamp}
             <EditButton setEditModeHandler={setEditMode}/>
             <DeleteButton/>
             <SetIsDoneButton/>
-        </div>
+        </>
+    )
+}
+
+function EditItemField({setItemHandler}){
+    return(
+        <>
+        <input 
+            id="title"
+            ></input>
+        <input 
+            id="description"
+            ></input>
+        <button>ADD ITEM</button>
+    </>
     )
 }
 
 function EditButton({setEditModeHandler}){
-    setEditModeHandler(console.log)
     return(
-        <button>Edit</button>
+        <button onClick={setEditModeHandler(console.log)}>Edit</button>
     )
 }
 
