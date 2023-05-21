@@ -6,13 +6,6 @@ export default function TodoList(){
 
     function handleListAdd(newItem) {
         setListItems((prevListItems) => {
-            // const newItem = {
-            //     id: prevListItems.length,
-            //     title: `title ${prevListItems.length}`,
-            //     description: 'description',
-            //     timestamp: 'timestamp',
-            //     isdone: true
-            // }
             return [...prevListItems, newItem];
         })
     }
@@ -87,30 +80,37 @@ function TodoItemContainer({item}){
 }
 
 function TodoItem({item}){
-    const isDone = item.isdone;
-    const editMode = true;
+    const [editMode, setEditState] = useState(false);
+    const [isDone, setIsDone] = useState(item.isdone);
 
-    function setEditMode(f){
-        console.log('f')
-        f('asdf')
+    function setEditMode(){
+        if(editMode){
+            setEditState(false);
+        } else {
+            setEditState(true);
+        }
     }
     return(
         <>
             {
                 editMode ? 
-                <EditItemField/>:
-                <span>item.description</span>
+                <>
+                    <EditItemField setEditModeHandler={setEditMode}/>
+                </>:
+                <span>
+                    {item.description}, 
+                    {item.timestamp},
+                    <EditButton setEditModeHandler={setEditMode}/>
+                    <DeleteButton/>
+                    <SetIsDoneButton/>
+                </span>
             }
-            {item.description}, 
-            {item.timestamp}
-            <EditButton setEditModeHandler={setEditMode}/>
-            <DeleteButton/>
-            <SetIsDoneButton/>
+            
         </>
     )
 }
 
-function EditItemField({setItemHandler}){
+function EditItemField({setEditModeHandler, setItemHandler}){
     return(
         <>
         <input 
@@ -119,14 +119,14 @@ function EditItemField({setItemHandler}){
         <input 
             id="description"
             ></input>
-        <button>ADD ITEM</button>
+        <button onClick={setEditModeHandler}>CONFIRM</button>
     </>
     )
 }
 
 function EditButton({setEditModeHandler}){
     return(
-        <button onClick={setEditModeHandler(console.log)}>Edit</button>
+        <button onClick={setEditModeHandler}>Edit</button>
     )
 }
 
