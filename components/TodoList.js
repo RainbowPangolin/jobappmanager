@@ -4,17 +4,29 @@ export default function TodoList(){
 
     const [listItems, setListItems] = useState(testData)
 
-    function handleListAdd(newItem) {
+    function handleListAddItem(newItem) {
         setListItems((prevListItems) => {
             return [...prevListItems, newItem];
         })
+    }
+
+    function handleListReplaceItem(id, newItem) {
+        console.log('replace')
+    }
+
+    function handleListDeleteItem(newItem) {
+        console.log('del')
     }
 
     const listItemsAsElements = listItems.map(
         (item) => {
             return(
                 <li key={item.id}>
-                    <TodoItemContainer item={item}/>
+                    <TodoItemContainer 
+                        item={item}
+                        handleListReplaceItem={handleListReplaceItem}
+                        handleListDeleteItem={handleListDeleteItem}
+                    />
                 </li>
             )
         }
@@ -24,7 +36,7 @@ export default function TodoList(){
 
     return(
         <>
-            <TodoItemAdder itemAdder={handleListAdd} numItemsInList={listItemsAsElements.length}/>
+            <TodoItemAdder itemAdder={handleListAddItem} numItemsInList={listItemsAsElements.length}/>
             <ul>{listItemsAsElements}</ul>
         </> 
         
@@ -32,7 +44,11 @@ export default function TodoList(){
 
 }
 
-function TodoItemAdder({itemAdder, numItemsInList}){
+function TodoItemAdder({    
+                            itemAdder, 
+                            numItemsInList
+                        }){
+
     const [itemTitle, setItemTitle] = useState('')
     const [itemDesc, setItemDesc] = useState('')
 
@@ -71,17 +87,30 @@ function TodoItemAdder({itemAdder, numItemsInList}){
     )
 }
 
-function TodoItemContainer({item}){
+function TodoItemContainer({
+    item,
+    handleListReplaceItem, 
+    handleListDeleteItem
+}){
     return(
         <div>
-            <TodoItem item={item}/>
+            <TodoItem 
+                item={item}
+                handleListReplaceItem={handleListReplaceItem}
+                handleListDeleteItem={handleListDeleteItem}
+            />
         </div>
     )
 }
 
-function TodoItem({item}){
+function TodoItem({
+    item,
+    handleListReplaceItem, 
+    handleListDeleteItem
+}){
+
     const [editMode, setEditState] = useState(false);
-    const [isDone, setIsDone] = useState(item.isdone);
+
 
     function setEditMode(){
         if(editMode){
@@ -90,12 +119,25 @@ function TodoItem({item}){
             setEditState(true);
         }
     }
+
+    const confirmEdit = (e) => {
+        try{
+            handleListReplaceItem(item.id, item)
+            setEditMode();
+        } catch (e){
+            alert(e)
+        }
+    }
     return(
         <>
             {
                 editMode ? 
                 <>
-                    <EditItemField setEditModeHandler={setEditMode}/>
+                    <EditItemField 
+                        item={item}
+                        confirmEditHandler={confirmEdit}
+                        // handleListReplaceItem={handleListReplaceItem}
+                    />
                 </>:
                 <span>
                     {item.description}, 
@@ -110,17 +152,42 @@ function TodoItem({item}){
     )
 }
 
-function EditItemField({setEditModeHandler, setItemHandler}){
+function EditItemField({item, confirmEditHandler, handleListReplaceItem}){
+    const [itemTitle, setItemTitle] = useState('')
+    const [itemDesc, setItemDesc] = useState('')
+
+    let newItem = {
+        id: item.id,
+        title: itemTitle,
+        description: itemDesc,
+        timestamp: 'timestampEdited',
+        isdone: true
+    }
+
+    const handleEdit = () => {
+        confirmEditHandler(item.id, newItem)
+    }
+
     return(
         <>
-        <input 
-            id="title"
-            ></input>
-        <input 
-            id="description"
-            ></input>
-        <button onClick={setEditModeHandler}>CONFIRM</button>
-    </>
+            <input 
+                id="title"
+                value={itemTitle}
+                onChange={
+                    (event) => {
+                        setItemTitle(event.target.value) 
+                    }
+                }></input>
+            <input 
+                id="description"
+                value={itemDesc}
+                onChange={
+                    (event) => {
+                        setItemDesc(event.target.value) 
+                    }
+                }></input>
+            <button onClick={handleEdit}>ADD ITEM</button>
+        </>
     )
 }
 
