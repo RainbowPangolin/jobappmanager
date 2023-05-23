@@ -11,7 +11,9 @@ export default function TodoList(){
     }
 
     function handleListReplaceItem(id, newItem) {
-        console.log('replace')
+        let newList = [...listItems];
+        newList[id] = newItem;
+        setListItems(newList);
     }
 
     function handleListDeleteItem(newItem) {
@@ -120,7 +122,7 @@ function TodoItem({
         }
     }
 
-    const confirmEdit = (e) => {
+    const confirmEdit = (id, item) => {
         try{
             handleListReplaceItem(item.id, item)
             setEditMode();
@@ -140,6 +142,7 @@ function TodoItem({
                     />
                 </>:
                 <span>
+                    {item.title}, 
                     {item.description}, 
                     {item.timestamp},
                     <EditButton setEditModeHandler={setEditMode}/>
@@ -166,6 +169,8 @@ function EditItemField({item, confirmEditHandler, handleListReplaceItem}){
 
     const handleEdit = () => {
         confirmEditHandler(item.id, newItem)
+        console.log(`ID ${item.id} ITEM`, newItem)
+
     }
 
     return(
@@ -186,7 +191,7 @@ function EditItemField({item, confirmEditHandler, handleListReplaceItem}){
                         setItemDesc(event.target.value) 
                     }
                 }></input>
-            <button onClick={handleEdit}>ADD ITEM</button>
+            <button onClick={handleEdit}>CONFIRM EDIT</button>
         </>
     )
 }
