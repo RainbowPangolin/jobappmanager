@@ -124,11 +124,15 @@ function TodoItem({
 
     const confirmEdit = (id, item) => {
         try{
-            handleListReplaceItem(item.id, item)
+            handleListReplaceItem(id, item)
             setEditMode();
         } catch (e){
             alert(e)
         }
+    }
+
+    const handleDeleteCallback = (id) => {
+        handleListDeleteItem(id)
     }
     return(
         <>
@@ -146,7 +150,7 @@ function TodoItem({
                     {item.description}, 
                     {item.timestamp},
                     <EditButton setEditModeHandler={setEditMode}/>
-                    <DeleteButton/>
+                    <DeleteButton handleDeleteCallback={handleDeleteCallback}/>
                     <SetIsDoneButton/>
                 </span>
             }
@@ -202,10 +206,14 @@ function EditButton({setEditModeHandler}){
     )
 }
 
-function DeleteButton(){
-    return(
-        <button>Delete</button>
+function DeleteButton({id, handleDeleteCallback}){
 
+    // const handleDelete = () => {
+    //     handleDeleteCallback(id) //This looks super dumb, I must be doing something VERY wrong
+    // }
+
+    return(
+        <button onClick={handleDeleteCallback}>Delete</button>
     )
 }
 function SetIsDoneButton(){
