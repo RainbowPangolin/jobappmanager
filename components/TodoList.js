@@ -16,8 +16,16 @@ export default function TodoList(){
         setListItems(newList);
     }
 
-    function handleListDeleteItem(newItem) {
+    function handleListDeleteItem(id) {
         console.log('del')
+
+        let newList = [...listItems];
+        newList.splice(id,1);
+        setListItems(newList);
+    }
+
+    for (let i = 0; i < listItems.length; i++){
+        listItems[i].id = i;
     }
 
     const listItemsAsElements = listItems.map(
@@ -131,8 +139,8 @@ function TodoItem({
         }
     }
 
-    const handleDeleteCallback = (id) => {
-        handleListDeleteItem(id)
+    const handleDeleteCallback = () => {
+        handleListDeleteItem(item.id)
     }
     return(
         <>
