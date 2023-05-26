@@ -38,11 +38,24 @@ const JobNoteExpander = () => {
     )
 }
 
+const JobItemAdder = () => {
+    return(
+        <>
+            <input></input>
+            <input></input>
+            <input></input>
+            <button type="submit">Add Job</button>
+        </>
+        
+    )
+}
+
 export default function JobsAppliedMainComponent(){
 
     return(
         <div>
             <p> JobsAppliedMainComponent </p>
+            <JobItemAdder/>
             <thead>
                 <tr>
                     <th colspan="5">The table header</th>
