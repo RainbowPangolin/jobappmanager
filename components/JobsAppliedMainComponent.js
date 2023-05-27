@@ -1,15 +1,24 @@
 import React from "react"
 
 const JobItemComponent = ({jobItem}) => {
+    let editMode = false;
     return(
         <tr>
-            <td>{jobItem.job_name}</td>
-            <td>{jobItem.app_status}</td>
-            <td>{jobItem.job_link}</td>
-            <td>{jobItem.app_status}</td>
-            <td><JobNoteExpander/></td>
-            <td><EditButton/></td>
-            <td><DeleteButton/></td>
+
+            {editMode ? 
+                <>
+                    <p>Edit</p>
+                </>:
+                <span>
+                    <td>{jobItem.job_name}</td>
+                    <td>{jobItem.app_status}</td>
+                    <td>{jobItem.job_link}</td>
+                    <td>{jobItem.app_status}</td>
+                    <td><JobNoteExpander/></td>
+                    <td><EditButton/></td>
+                    <td><DeleteButton/></td>
+                </span>}
+
         </tr>
     )
 }
