@@ -17,8 +17,6 @@ export default function TodoList(){
     }
 
     function handleListDeleteItem(id) {
-        console.log('del')
-
         let newList = [...listItems];
         newList.splice(id,1);
         setListItems(newList);
@@ -41,9 +39,7 @@ export default function TodoList(){
             )
         }
     )
-
-    console.log(listItemsAsElements)
-
+    
     return(
         <>
             <TodoItemAdder itemAdder={handleListAddItem} numItemsInList={listItemsAsElements.length}/>
@@ -181,7 +177,6 @@ function EditItemField({item, confirmEditHandler, handleListReplaceItem}){
 
     const handleEdit = () => {
         confirmEditHandler(item.id, newItem)
-        console.log(`ID ${item.id} ITEM`, newItem)
 
     }
 
