@@ -38,8 +38,20 @@ const DeleteButton = () => {
 }
 
 const JobItemList = ({listOfJobs}) => {
+
+    const listItemsAsElements = listOfJobs.map(
+        (item) => {
+            return(
+                <li key={item.id}>
+                    <JobItemComponent jobItem={item}/>
+                </li>
+            )
+        }
+    )
+
+
     return(
-        <JobItemComponent jobItem={listOfJobs[0]}/>
+        <ul>{listItemsAsElements}</ul>
     )    
 }
 
@@ -154,6 +166,7 @@ export default function JobsAppliedMainComponent(){
 
 
 const testItem = {
+    id: 0,
     user_id: "testUser",
     job_name: "JobName", 
     company: "Comp1", 
