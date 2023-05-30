@@ -1,4 +1,4 @@
-import {useState, useContext} from "react";
+import {useState, useContext, useEffect} from "react";
 import { CallbacksContext } from "./utils/CallbacksContexts";
 import * as db from "./utils/mockDB";
 
@@ -121,6 +121,7 @@ const JobItemAdder = () => {
             date_applied:"TimestampTODO"
           }
         addJobCallback(newJob);
+        db.createJob(newJob);
     }
 
     return(
