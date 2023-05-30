@@ -6,6 +6,7 @@ const JobItemComponent = ({jobItem}) => {
     //TODO Edit functionality
     
     const [editMode, setEditMode] = useState(false)
+    const [curJob, setCurJob] = useState(jobItem);
     const toggleEdit = () => {
         if(editMode){
             setEditMode(false);
@@ -15,12 +16,18 @@ const JobItemComponent = ({jobItem}) => {
         console.log('asdf')
     }
 
+    const submitUpdate = () => {
+
+    };
+
     return(
         <tr>
             {editMode ? 
                 <>
                     <td><input></input></td>
-                    <td><EditButton toggleEdit={toggleEdit}>Confirm Edit</EditButton></td>
+                    <td><input></input></td>
+                    <td><input></input></td>
+                    <td><EditButton toggleEdit={toggleEdit} submitUpdate={submitUpdate}>Confirm Edit</EditButton></td>
                 </>:
                 <>
                     <td>{jobItem.job_name}</td>
@@ -180,10 +187,10 @@ export default function JobsAppliedMainComponent(){
                         <th colSpan="5">The table header</th>
                     </tr>
                     <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
+                        <td>Job Name</td>
+                        <td>Company</td>
+                        <td>Link</td>
+                        <td>Status</td>
                         <td>5</td>
                         <td>6</td>
                         <td>7</td>
