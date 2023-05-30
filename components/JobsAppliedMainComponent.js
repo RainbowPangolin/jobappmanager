@@ -1,6 +1,5 @@
-import {useState, useContext, createContext} from "react"
-
-const AddJobCallbackContext = createContext(null);
+import {useState, useContext} from "react"
+import { CallbacksContext } from "./utils/CallbacksContexts";
 
 const JobItemComponent = ({jobItem}) => {
     let editMode = false;
@@ -63,7 +62,9 @@ const JobNoteExpander = () => {
 
 const JobItemAdder = () => {
 
-    const addJobCallback = useContext(AddJobCallbackContext);
+    const cbList = useContext(CallbacksContext);
+
+    const addJobCallback = cbList.addJobCallback;
 
     const [jobName, setJobName] = useState('')
     const [company, setCompany] = useState('')
@@ -126,13 +127,30 @@ export default function JobsAppliedMainComponent(){
     const [listOfJobs, setListOfJobs] = useState([testItem])
 
     console.log(listOfJobs)
-
-    const addJobCallback = (newJob) => {
-        setListOfJobs([newJob, ...listOfJobs]);
-    }
+    const callbacks = {
+        addJobCallback: (newJob) => {
+            setListOfJobs([newJob, ...listOfJobs]) 
+        },
+        deleteJobCallback: (id) => { 
+            const filteredArray = listOfJobs.filter((item) => {
+                item.id != id;
+            });
+            setListOfJobs([filteredArray]);
+        },
+        updateJobCallback: (id, newJob) => { 
+            const newArr = listOfJobs.map((item) => {
+                if (item.id === id){
+                    return newJob;
+                } else {
+                    return item;
+                }
+            })
+            newArr;
+        },
+      };
 
     return(
-        <AddJobCallbackContext.Provider value={addJobCallback}>
+        <CallbacksContext.Provider value={callbacks}>
             <p> JobsAppliedMainComponent </p>
             <JobItemAdder/>
             <table>
@@ -157,7 +175,7 @@ export default function JobsAppliedMainComponent(){
                 </tbody>
             </table>
             
-        </AddJobCallbackContext.Provider>
+        </CallbacksContext.Provider>
     )
 }
 
