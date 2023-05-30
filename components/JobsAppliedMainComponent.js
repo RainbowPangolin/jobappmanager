@@ -17,44 +17,44 @@ const JobItemComponent = ({jobItem}) => {
     }
 
     const submitUpdate = () => {
-
+        console.log(curJob);
     };
 
     return(
         <tr>
             {editMode ? 
                 <>
-                    <td><input></input></td>
-                    <td><input></input></td>
-                    <td><input></input></td>
+                    <td><input defaultValue={curJob.job_name} onChange={(e) => setCurJob({ ...curJob, job_name: e.target.value })}></input></td>
+                    <td><input defaultValue={curJob.company} onChange={(e) => setCurJob({ ...curJob, company: e.target.value })}></input></td>
+                    <td><input defaultValue={curJob.job_link} onChange={(e) => setCurJob({ ...curJob, job_link: e.target.value })}></input></td>
                     <td><EditButton toggleEdit={toggleEdit} submitUpdate={submitUpdate}>Confirm Edit</EditButton></td>
                 </>:
                 <>
-                    <td>{jobItem.job_name}</td>
-                    <td>{jobItem.company}</td>
-                    <td>{jobItem.job_link}</td>
-                    <td>{jobItem.app_status}</td>
+                    <td>{curJob.job_name}</td>
+                    <td>{curJob.company}</td>
+                    <td>{curJob.job_link}</td>
+                    <td>{curJob.app_status}</td>
                     <td><JobNoteExpander/></td>
                     <td><EditButton toggleEdit={toggleEdit}>Edit</EditButton></td>
                     <td><DeleteButton/></td>
-                    <td>{jobItem.id}</td>
+                    <td>{curJob.id}</td>
                 </>}
 
         </tr>
     )
 }
 
-const EditButton = ({toggleEdit, children}) => {
+const EditButton = ({toggleEdit, submitUpdate, children}) => {
     const cbList = useContext(CallbacksContext);
 
     const updateJobCallback = cbList.updateJobCallback;
 
     const setEditMode = () => {
-        if(false){
-            updateJobCallback('asdf', 'sdfg');
-        }
         toggleEdit.call();
+        submitUpdate?.call();
+
     }
+
 
     return(
         <button onClick={setEditMode}>{children}</button>
