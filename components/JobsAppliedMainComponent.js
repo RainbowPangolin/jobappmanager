@@ -2,11 +2,18 @@ import {useState, useContext} from "react"
 import { CallbacksContext } from "./utils/CallbacksContexts";
 
 const JobItemComponent = ({jobItem}) => {
-    let editMode = false;
+    const [editMode, setEditMode] = useState(false)
+    const toggleEdit = () => {
+        if(editMode){
+            setEditMode(false);
+        } else {
+            setEditMode(true);
+        }
+    }
+
     return(
         <tr>
-
-            {editMode ? 
+            {false ? 
                 <>
                     <p>Edit</p>
                 </>:
@@ -16,7 +23,7 @@ const JobItemComponent = ({jobItem}) => {
                     <td>{jobItem.job_link}</td>
                     <td>{jobItem.app_status}</td>
                     <td><JobNoteExpander/></td>
-                    <td><EditButton/></td>
+                    <td><EditButton toggleEdit={toggleEdit}/></td>
                     <td><DeleteButton/></td>
                 </>}
 
@@ -24,7 +31,11 @@ const JobItemComponent = ({jobItem}) => {
     )
 }
 
-const EditButton = () => {
+const EditButton = ({toggleEdit}) => {
+    const cbList = useContext(CallbacksContext);
+
+    const updateJobCallback = cbList.updateJobCallback;
+
     return(
         <button>Edit</button>
     )
@@ -38,19 +49,15 @@ const DeleteButton = () => {
 
 const JobItemList = ({listOfJobs}) => {
 
-    const listItemsAsElements = listOfJobs.map(
-        (item) => {
-            return(
-                <li key={item.id}>
-                    <JobItemComponent jobItem={item}/>
-                </li>
-            )
-        }
-    )
+    const listItemsAsElements = listOfJobs.map((item) => (
+        <JobItemComponent key={item.id} jobItem={item}/>
+    ));
 
 
     return(
-        <ul>{listItemsAsElements}</ul>
+        <tbody>
+            {listItemsAsElements}
+        </tbody>
     )    
 }
 
@@ -101,14 +108,15 @@ const JobItemAdder = () => {
                 <tr>
                     <th colSpan="4">Add Job</th>
                 </tr>
-            </thead>
-            <tbody>
+
                 <tr>
                     <td>jobname</td>
                     <td>company</td>
                     <td>link</td>
                     <td>button</td>
                 </tr>
+            </thead>
+            <tbody>
                 <tr>
                     <td><input onChange={updateJob}></input></td>
                     <td><input onChange={updateCompany}></input></td>
@@ -126,7 +134,6 @@ export default function JobsAppliedMainComponent(){
 
     const [listOfJobs, setListOfJobs] = useState([testItem])
 
-    console.log(listOfJobs)
     const callbacks = {
         addJobCallback: (newJob) => {
             setListOfJobs([newJob, ...listOfJobs]) 
@@ -151,15 +158,13 @@ export default function JobsAppliedMainComponent(){
 
     return(
         <CallbacksContext.Provider value={callbacks}>
-            <p> JobsAppliedMainComponent </p>
+            <p> JobsAppliedMainComponent </p> 
             <JobItemAdder/>
             <table>
                 <thead>
                     <tr>
                         <th colSpan="5">The table header</th>
                     </tr>
-                </thead>
-                <tbody>
                     <tr>
                         <td>1</td>
                         <td>2</td>
@@ -170,9 +175,8 @@ export default function JobsAppliedMainComponent(){
                         <td>7</td>
                         <td>8</td>
                     </tr>
-
-                    <JobItemList listOfJobs={listOfJobs}/>
-                </tbody>
+                </thead>
+                <JobItemList listOfJobs={listOfJobs}/>
             </table>
             
         </CallbacksContext.Provider>
