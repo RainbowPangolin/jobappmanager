@@ -1,5 +1,6 @@
-import {useState, useContext} from "react"
+import {useState, useContext} from "react";
 import { CallbacksContext } from "./utils/CallbacksContexts";
+import * as db from "./utils/mockDB";
 
 const JobItemComponent = ({jobItem}) => {
     const [editMode, setEditMode] = useState(false)
@@ -91,6 +92,7 @@ const JobItemAdder = () => {
 
     const addJob = () => {
         let newJob = {
+            id: db.getNewId(),
             user_id: "testUser",
             job_name: jobName, 
             company: company, 
@@ -132,7 +134,7 @@ const JobItemAdder = () => {
 
 export default function JobsAppliedMainComponent(){
 
-    const [listOfJobs, setListOfJobs] = useState([testItem])
+    const [listOfJobs, setListOfJobs] = useState(db.getAll())
 
     const callbacks = {
         addJobCallback: (newJob) => {
@@ -187,13 +189,3 @@ export default function JobsAppliedMainComponent(){
 
 
 
-const testItem = {
-    id: 0,
-    user_id: "testUser",
-    job_name: "JobName", 
-    company: "Comp1", 
-    job_content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt augue nulla, sit amet tempor lorem lobortis nec. Nam molestie augue ac ex ullamcorper eleifend. Sed suscipit posuere est, vel dignissim quam.",
-    job_link:"https://www.example.com/job/software-engineer", 
-    app_status:"Applied", 
-    date_applied:"2023-05-04"
-  }
