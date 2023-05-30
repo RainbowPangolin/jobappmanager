@@ -26,6 +26,7 @@ const JobItemComponent = ({jobItem}) => {
                     <td><JobNoteExpander/></td>
                     <td><EditButton toggleEdit={toggleEdit}/></td>
                     <td><DeleteButton/></td>
+                    <td>{jobItem.id}</td>
                 </>}
 
         </tr>

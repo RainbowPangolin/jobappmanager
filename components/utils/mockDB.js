@@ -32,6 +32,6 @@ export function getAll(){
 }
 
 export function add(newJob){
-    
+    //TODO
 }
 
