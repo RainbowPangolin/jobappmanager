@@ -10,13 +10,15 @@ const JobItemComponent = ({jobItem}) => {
         } else {
             setEditMode(true);
         }
+        console.log('asdf')
     }
 
     return(
         <tr>
-            {false ? 
+            {editMode ? 
                 <>
-                    <p>Edit</p>
+                    <td><input></input></td>
+                    <td><EditButton toggleEdit={toggleEdit}>Confirm Edit</EditButton></td>
                 </>:
                 <>
                     <td>{jobItem.job_name}</td>
@@ -24,7 +26,7 @@ const JobItemComponent = ({jobItem}) => {
                     <td>{jobItem.job_link}</td>
                     <td>{jobItem.app_status}</td>
                     <td><JobNoteExpander/></td>
-                    <td><EditButton toggleEdit={toggleEdit}/></td>
+                    <td><EditButton toggleEdit={toggleEdit}>Edit</EditButton></td>
                     <td><DeleteButton/></td>
                     <td>{jobItem.id}</td>
                 </>}
@@ -33,13 +35,20 @@ const JobItemComponent = ({jobItem}) => {
     )
 }
 
-const EditButton = ({toggleEdit}) => {
+const EditButton = ({toggleEdit, children}) => {
     const cbList = useContext(CallbacksContext);
 
     const updateJobCallback = cbList.updateJobCallback;
 
+    const setEditMode = () => {
+        if(false){
+            updateJobCallback('asdf', 'sdfg');
+        }
+        toggleEdit.call();
+    }
+
     return(
-        <button>Edit</button>
+        <button onClick={setEditMode}>{children}</button>
     )
 }
 
