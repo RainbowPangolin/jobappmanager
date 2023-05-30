@@ -3,6 +3,8 @@ import { CallbacksContext } from "./utils/CallbacksContexts";
 import * as db from "./utils/mockDB";
 
 const JobItemComponent = ({jobItem}) => {
+    //TODO Edit functionality
+    
     const [editMode, setEditMode] = useState(false)
     const toggleEdit = () => {
         if(editMode){
