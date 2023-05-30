@@ -11,7 +11,7 @@ const testItem = {
     date_applied:"2023-05-04"
   }
   
-const listOfJobs = [testItem];
+let listOfJobs = [testItem];
 
 export function initializeUsedIds(listOfIds){
     listOfIds.forEach((id) => {
@@ -31,7 +31,22 @@ export function getAll(){
     return listOfJobs;
 }
 
-export function add(newJob){
-    //TODO
+export function createJob(newJob){
+    listOfJobs.push(newJob);
 }
+
+export function updateJob(id, newJob){
+    listOfJobs.filter((job) => {
+        if(job.id === id){
+            return {...newJob, id: id};
+        }
+        return job;
+    });
+}
+
+export function deleteJob(newJob){
+    listOfJobs.push(newJob);
+}
+
+
 
