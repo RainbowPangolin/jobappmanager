@@ -154,7 +154,11 @@ const JobItemAdder = () => {
 
 export default function JobsAppliedMainComponent(){
 
-    const [listOfJobs, setListOfJobs] = useState(db.getAll())
+    const [listOfJobs, setListOfJobs] = useState([]);
+
+    useEffect(() => {
+        
+    }, [])
 
     const callbacks = {
         addJobCallback: (newJob) => {
