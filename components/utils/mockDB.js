@@ -1,17 +1,11 @@
-const usedIds = new Set();
+import * as fs from 'fs';
 
-const testItem = {
-    id: 0,
-    user_id: "testUser",
-    job_name: "JobName", 
-    company: "Comp1", 
-    job_content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt augue nulla, sit amet tempor lorem lobortis nec. Nam molestie augue ac ex ullamcorper eleifend. Sed suscipit posuere est, vel dignissim quam.",
-    job_link:"https://www.example.com/job/software-engineer", 
-    app_status:"Applied", 
-    date_applied:"2023-05-04"
-  }
+const rawData = fs.readFileSync('./mockdb.json');
+const data = JSON.parse(rawData);
+
+const usedIds = new Set();
   
-let listOfJobs = [testItem];
+const listOfJobs = [data];
 
 export function initializeUsedIds(listOfIds){
     listOfIds.forEach((id) => {
