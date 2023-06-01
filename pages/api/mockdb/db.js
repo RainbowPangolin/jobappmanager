@@ -21,7 +21,7 @@ export default (req, res) => {
 
   readJSONFile('pages/api/mockdb/testData.json')
   .then((d) => {
-    res.status(200).json({ message: `File operations completed: ${d}` })
+    res.status(200).json(d)
   })
   .catch ((e => {
     res.status(200).json({ message: `File operations failed: ${e}` })

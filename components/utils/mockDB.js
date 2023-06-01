@@ -1,3 +1,5 @@
+import * as dataFetcher from './dataFetcher.js';
+
 const data = {
     "id": 0,
     "user_id": "testUser",
@@ -28,8 +30,19 @@ export function getNewId() {
     return newId;
 }
 
-export function getAll(){
-    return listOfJobs;
+export function fetchAll(){
+    return new Promise((resolve, reject) => {
+        dataFetcher.fetchData()
+        .then((data) => {
+            setTimeout(() => {
+              resolve(data);
+            }, 4000);
+        })
+        .catch((error) => {
+            console.log(`mockDB failure: ${error}`);
+            reject(error);
+        });
+    });
 }
 
 export function createJob(newJob){
