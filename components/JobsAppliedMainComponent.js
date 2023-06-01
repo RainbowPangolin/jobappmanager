@@ -152,12 +152,16 @@ const JobItemAdder = () => {
     )
 }
 
+
 export default function JobsAppliedMainComponent(){
 
     const [listOfJobs, setListOfJobs] = useState([]);
 
     useEffect(() => {
-        
+        db.fetchAll().then((jobs) => {
+            let jobList = JSON.parse(jobs).testItem;
+            setListOfJobs([jobList]);
+        })
     }, [])
 
     const callbacks = {
