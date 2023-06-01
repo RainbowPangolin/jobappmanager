@@ -1,6 +1,6 @@
 import {useState, useContext, useEffect} from "react";
 import { CallbacksContext } from "./utils/CallbacksContexts";
-import * as db from "./utils/mockDB";
+import * as db from "./utils/localDB";
 
 const JobItemComponent = ({jobItem}) => {
     //TODO Edit functionality
@@ -68,17 +68,23 @@ const DeleteButton = () => {
 }
 
 const JobItemList = ({listOfJobs}) => {
-
-    const listItemsAsElements = listOfJobs.map((item) => (
-        <JobItemComponent key={item.id} jobItem={item}/>
-    ));
-
-
+    console.log(listOfJobs.length, listOfJobs)
+    if(listOfJobs.length > 0){
+        const listItemsAsElements = listOfJobs.map((item) => (
+            <JobItemComponent key={item.id} jobItem={item}/>
+        ));
+    
+    
+        return(
+            <tbody>
+                {listItemsAsElements}
+            </tbody>
+        )    
+    }
     return(
         <tbody>
-            {listItemsAsElements}
         </tbody>
-    )    
+    )   
 }
 
 const JobNoteExpander = () => {
@@ -158,11 +164,8 @@ export default function JobsAppliedMainComponent(){
     const [listOfJobs, setListOfJobs] = useState([]);
 
     useEffect(() => {
-        db.fetchAll().then((jobs) => {
-            let jobList = JSON.parse(jobs).testItem;
-            setListOfJobs([jobList]);
-        })
-    }, [])
+        setListOfJobs(db.getList());
+    }, []);
 
     const callbacks = {
         addJobCallback: (newJob) => {
