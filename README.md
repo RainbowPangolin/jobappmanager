@@ -26,6 +26,8 @@ Frontend TODO-
     - Job Content edited via a popup, but added using simple gui
       - Maybe a simple version + advanced create?
     - Use localstorage for caching, build off local storage first
+    - Set status with dropdown
+    - Clean up appearance with CSS
     - Deploy
     - Create authentication system for cloud storage
     - Transition to consuming 

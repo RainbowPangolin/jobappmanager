@@ -36,7 +36,7 @@ const JobItemComponent = ({jobItem}) => {
                     <td>{curJob.job_name}</td>
                     <td>{curJob.company}</td>
                     <td>{curJob.job_link}</td>
-                    <td>{curJob.app_status}</td>
+                    <td><JobStatusSelector/></td>
                     <td><JobNoteExpander/></td>
                     <td><EditButton toggleEdit={toggleEdit}>Edit</EditButton></td>
                     <td><DeleteButton submitDelete={submitDelete}/></td>
@@ -44,6 +44,22 @@ const JobItemComponent = ({jobItem}) => {
                 </>}
 
         </tr>
+    )
+}
+
+const JobStatusSelector = () => {
+    const cbList = useContext(CallbacksContext);
+
+    const setJobItemStatus = cbList.setJobItemStatus;
+
+    return(
+        <select onChange={(e) => setJobItemStatus(e.target.value)}>
+            <option value="TODO">TODO</option>
+            <option value="Applied">Applied</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Offered">Offered</option>
+            <option value="Accepted">Accepted</option>
+        </select>
     )
 }
 
@@ -198,6 +214,9 @@ export default function JobsAppliedMainComponent(){
             })
             newArr;
         },
+        setJobItemStatus: (id, status) => {
+            //TODO Refactor to use callbacks
+        }
       };
 
     return(
