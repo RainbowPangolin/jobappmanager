@@ -67,8 +67,18 @@ export function updateJob(id, newJob){
     localDb.setItem('jobList', JSON.stringify(newJobsList))
 }
 
-export function deleteJob(newJob){
-    listOfJobs.push(newJob);
+export function deleteJob(id){
+    let myJobs = JSON.parse(localDb.getItem('jobList'));
+
+    const newJobsList = myJobs.filter((job) => {
+        if(job.id === id){
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+    localDb.setItem('jobList', JSON.stringify(newJobsList))
 }
 
 

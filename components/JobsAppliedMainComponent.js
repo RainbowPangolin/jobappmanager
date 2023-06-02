@@ -16,9 +16,12 @@ const JobItemComponent = ({jobItem}) => {
     }
 
     const submitUpdate = () => {
-        console.log(curJob)
         db.updateJob(curJob.id, curJob);
     };
+
+    const submitDelete = () => {
+        db.deleteJob(curJob.id);
+    }
 
     return(
         <tr>
@@ -36,7 +39,7 @@ const JobItemComponent = ({jobItem}) => {
                     <td>{curJob.app_status}</td>
                     <td><JobNoteExpander/></td>
                     <td><EditButton toggleEdit={toggleEdit}>Edit</EditButton></td>
-                    <td><DeleteButton/></td>
+                    <td><DeleteButton submitDelete={submitDelete}/></td>
                     <td>{curJob.id}</td>
                 </>}
 
@@ -46,8 +49,6 @@ const JobItemComponent = ({jobItem}) => {
 
 const EditButton = ({toggleEdit, submitUpdate, children}) => {
     const cbList = useContext(CallbacksContext);
-
-    const updateJobCallback = cbList.updateJobCallback;
 
     const setEditMode = () => {
         toggleEdit.call();
@@ -60,14 +61,24 @@ const EditButton = ({toggleEdit, submitUpdate, children}) => {
     )
 }
 
-const DeleteButton = () => {
+const DeleteButton = ({submitDelete}) => {
+
+    //TODO- Using the callbacks via context will probably lead to nicer code. Refactor when you get a chance.
+
+    const cbList = useContext(CallbacksContext);
+
+    const myDel = () => {
+        submitDelete.call();
+        cbList.deleteJobCallback.call();
+
+    }
+
     return(
-        <button>Delete</button>
+        <button onClick={myDel}>Delete</button>
     )
 }
 
 const JobItemList = ({listOfJobs}) => {
-    console.log(listOfJobs.length, listOfJobs)
     if(listOfJobs.length > 0){
         const listItemsAsElements = listOfJobs.map((item) => (
             <JobItemComponent key={item.id} jobItem={item}/>
@@ -171,10 +182,11 @@ export default function JobsAppliedMainComponent(){
             setListOfJobs([newJob, ...listOfJobs]) 
         },
         deleteJobCallback: (id) => { 
-            const filteredArray = listOfJobs.filter((item) => {
-                item.id != id;
-            });
-            setListOfJobs([filteredArray]);
+            // const filteredArray = listOfJobs.filter((item) => {
+            //     item.id != id;
+            // });
+            // setListOfJobs([filteredArray]);
+            setListOfJobs(db.getList());
         },
         updateJobCallback: (id, newJob) => { 
             const newArr = listOfJobs.map((item) => {
