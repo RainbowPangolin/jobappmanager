@@ -37,8 +37,6 @@ export function getNewId() {
 
 export function getList(){
     let myJobs = localDb.getItem('jobList');
-
-    console.log(`myJobns: ${typeof myJobs}`)
     if (!myJobs){
         return [];
     }
@@ -51,17 +49,22 @@ export function createJob(newJob){
         myJobs = [];
     }
 
-    const newJobList = [...JSON.parse(myJobs), newJob]
-    localDb.setItem('jobList', JSON.stringify(newJobList))
+    const newJobsList = [...JSON.parse(myJobs), newJob]
+    localDb.setItem('jobList', JSON.stringify(newJobsList))
 }
 
 export function updateJob(id, newJob){
-    listOfJobs.filter((job) => {
+    let myJobs = JSON.parse(localDb.getItem('jobList'));
+
+    const newJobsList = myJobs.map((job) => {
         if(job.id === id){
             return {...newJob, id: id};
+        } else {
+            return job;
         }
-        return job;
     });
+
+    localDb.setItem('jobList', JSON.stringify(newJobsList))
 }
 
 export function deleteJob(newJob){

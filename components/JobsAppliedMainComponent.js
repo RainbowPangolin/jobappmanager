@@ -13,11 +13,11 @@ const JobItemComponent = ({jobItem}) => {
         } else {
             setEditMode(true);
         }
-        console.log('asdf')
     }
 
     const submitUpdate = () => {
-        console.log(curJob);
+        console.log(curJob)
+        db.updateJob(curJob.id, curJob);
     };
 
     return(
@@ -52,7 +52,6 @@ const EditButton = ({toggleEdit, submitUpdate, children}) => {
     const setEditMode = () => {
         toggleEdit.call();
         submitUpdate?.call();
-
     }
 
 
