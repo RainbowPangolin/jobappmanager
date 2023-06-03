@@ -66,10 +66,6 @@ function TodoItemAdder({
 		isdone: true
 	};
 
-	const handleChange = (event) => {
-		setItemTitle(event.target.value);
-	};
-
 	return(
 		<>
 			<input 
@@ -163,7 +159,7 @@ function TodoItem({
 	);
 }
 
-function EditItemField({item, confirmEditHandler, handleListReplaceItem}){
+function EditItemField({item, confirmEditHandler}){
 	const [itemTitle, setItemTitle] = useState('');
 	const [itemDesc, setItemDesc] = useState('');
 
@@ -209,12 +205,7 @@ function EditButton({setEditModeHandler}){
 	);
 }
 
-function DeleteButton({id, handleDeleteCallback}){
-
-	// const handleDelete = () => {
-	//     handleDeleteCallback(id) //This looks super dumb, I must be doing something VERY wrong
-	// }
-
+function DeleteButton({handleDeleteCallback}){
 	return(
 		<button onClick={handleDeleteCallback}>Delete</button>
 	);
