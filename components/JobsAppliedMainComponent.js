@@ -194,11 +194,13 @@ export default function JobsAppliedMainComponent(){
 		addJobCallback: (newJob) => {
 			setListOfJobs([newJob, ...listOfJobs]); 
 		},
+		// Definitions left in case I want to update the architecture to use these callbacks correctly.
+		// eslint-disable-next-line
 		deleteJobCallback: (id) => { 
 			setListOfJobs(db.getList());
 		},
+		// eslint-disable-next-line
 		updateJobCallback: (id, newJob) => { 
-			//Do nothing
 		},
 		setJobItemStatus: (id, status) => {
 			const theJob = db.getJob(id);
