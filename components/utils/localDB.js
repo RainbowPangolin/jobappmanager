@@ -17,8 +17,6 @@ function getLocalStorage() {
 
 const localDb = getLocalStorage();
 
-let listOfJobs = localDb?.getItem('jobList'); 
-
 const usedIds = new Set();
 
 export function initializeUsedIds(listOfIds){
@@ -41,6 +39,20 @@ export function getList(){
         return [];
     }
     return JSON.parse(myJobs);
+}
+
+export function getJob(id){
+    let myJobs = localDb.getItem('jobList');
+    if (!myJobs){
+        return null;
+    }
+
+    //Yes, I should refactor to a map data structure instead of this list. TODO.
+
+    const myList = JSON.parse(myJobs);
+    const theJobListSingle = myList.filter((item) => item.id === id);
+    const theJob = theJobListSingle[0];
+    return theJob;
 }
 
 export function createJob(newJob){

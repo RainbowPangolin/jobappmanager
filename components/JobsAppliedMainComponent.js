@@ -3,7 +3,7 @@ import { CallbacksContext } from "./utils/CallbacksContexts";
 import * as db from "./utils/localDB";
 
 const JobItemComponent = ({jobItem}) => {
-    //TODO Edit functionality
+    //TODO Refactoring so that each job is within its own context might be smart? Not worth benchmarking in real life probably, but I'll put it as TODO
     
     const [editMode, setEditMode] = useState(false)
     const [curJob, setCurJob] = useState(jobItem);
@@ -36,7 +36,7 @@ const JobItemComponent = ({jobItem}) => {
                     <td>{curJob.job_name}</td>
                     <td>{curJob.company}</td>
                     <td>{curJob.job_link}</td>
-                    <td><JobStatusSelector/></td>
+                    <td><JobStatusSelector job={curJob}/></td>
                     <td><JobNoteExpander/></td>
                     <td><EditButton toggleEdit={toggleEdit}>Edit</EditButton></td>
                     <td><DeleteButton submitDelete={submitDelete}/></td>
@@ -47,13 +47,13 @@ const JobItemComponent = ({jobItem}) => {
     )
 }
 
-const JobStatusSelector = () => {
+const JobStatusSelector = ({job}) => {
     const cbList = useContext(CallbacksContext);
 
     const setJobItemStatus = cbList.setJobItemStatus;
 
     return(
-        <select onChange={(e) => setJobItemStatus(e.target.value)}>
+        <select defaultValue={job.status} onChange={(e) => setJobItemStatus(job.id, e.target.value)}>
             <option value="TODO">TODO</option>
             <option value="Applied">Applied</option>
             <option value="Rejected">Rejected</option>
@@ -78,8 +78,6 @@ const EditButton = ({toggleEdit, submitUpdate, children}) => {
 }
 
 const DeleteButton = ({submitDelete}) => {
-
-    //TODO- Using the callbacks via context will probably lead to nicer code. Refactor when you get a chance.
 
     const cbList = useContext(CallbacksContext);
 
@@ -205,17 +203,12 @@ export default function JobsAppliedMainComponent(){
             setListOfJobs(db.getList());
         },
         updateJobCallback: (id, newJob) => { 
-            const newArr = listOfJobs.map((item) => {
-                if (item.id === id){
-                    return newJob;
-                } else {
-                    return item;
-                }
-            })
-            newArr;
         },
         setJobItemStatus: (id, status) => {
             //TODO Refactor to use callbacks
+            console.log(id, status)
+            const theJob = db.getJob(id);
+            db.updateJob(id, {...theJob, status: status})
         }
       };
 
