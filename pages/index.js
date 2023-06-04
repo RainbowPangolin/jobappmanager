@@ -75,6 +75,7 @@ export default function Home() {
 				</a>
 			</footer>
 
+			{/* eslint-disable-next-line */}
 			<style jsx>{`
 				main {
 					padding: 5rem 0;
@@ -111,7 +112,7 @@ export default function Home() {
 						DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 				}
 			`}</style>
-
+			{/* eslint-disable-next-line */}
 			<style jsx global>{`
 				html,
 				body {

@@ -4,6 +4,7 @@ import styles from '../styles/grid.module.css';
 
 const MyPage = () => {
 	const [response, setResponse] = useState('');
+	// eslint-disable-next-line
 	const [url, setUrl] = useState('/api/applications/User1/1');
 
 	const handleClick = async (url) => {
@@ -126,7 +127,7 @@ const MyPage = () => {
 
 
 
-	const handleCustomButtonClick = (event) => {
+	const handleCustomButtonClick = () => {
 		const url = document.getElementById('customRoute');
 		setUrl(url);
 		handleClick(url);
