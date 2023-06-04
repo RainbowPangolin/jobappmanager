@@ -41,6 +41,19 @@ export function getList(){
 	return JSON.parse(myJobs);
 }
 
+export function getItem(dataKey){
+	let item = localDb.getItem(dataKey);
+	return JSON.parse(item);
+}
+
+export function setItem(dataKey, item){
+	try{
+		localDb.setItem(dataKey, item);
+	} catch (e) {
+		console.log(e);
+	}
+}
+
 export function getJob(id){
 	let myJobs = localDb.getItem('jobList');
 	if (!myJobs){

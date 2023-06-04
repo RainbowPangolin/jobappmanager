@@ -1,4 +1,4 @@
-import {TodoList, ResumeLinker, ReferencesSheet, NotesComponent, JobsAppliedMainComponent} from '../components';
+import * as Components from '../components';
 
 
 export default function MainPage(){
@@ -7,16 +7,19 @@ export default function MainPage(){
 			<div>
 				<details>
 					<summary>TODO LIST</summary>
-					<TodoList/>
+					<Components.TodoList/>
 
 				</details>
-				<ResumeLinker/>
-				<ReferencesSheet/>
-				<NotesComponent/>
+				<Components.ResumeLinker/>
+				<Components.ReferencesSheet/>
+				<Components.NotesComponent/>
 			</div>
 
 			<div>
-				<JobsAppliedMainComponent/>
+				<Components.JobsAppliedMainComponent/>
+				<Components.DownloadDataButton dataKey={'jobList'}>
+					Download Job Applications Backup
+				</Components.DownloadDataButton>
 			</div>
 		</div>
 	);
