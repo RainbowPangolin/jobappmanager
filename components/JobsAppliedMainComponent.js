@@ -1,7 +1,7 @@
 import {useState, useContext, useEffect} from 'react';
 import { CallbacksContext } from './utils/CallbacksContexts';
 import * as db from './utils/localDB';
-import JobNotesDialogButton from './JobNotesDialog';
+import JobNotesDialogButton from './JobNotesDialogButton';
 
 const JobItemComponent = ({jobItem}) => {
 	//TODO Refactoring so that each job is within its own context might be smart? Not worth benchmarking in real life probably, but I'll put it as TODO
