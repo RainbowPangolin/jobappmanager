@@ -7,8 +7,6 @@ export default function UploadDataButton({dataKey, children, getUploadedData}){
 		db.setItem(dataKey, getUploadedData.call());
 	};
 
-	
-
 	return(
 		<button onClick={uploadToStorage}>
 			{children}
