@@ -23,6 +23,7 @@ module.exports = {
 			'tab'
 		],
 		'linebreak-style': [
+			'off',
 			'unix'
 		],
 		'quotes': [
