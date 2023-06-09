@@ -17,8 +17,6 @@ export default function DownloadDataButton({dataKey, children}){
 
 	};
 
-	
-
 	return(
 		<button onClick={downloadToBrowser}>
 			{children}
