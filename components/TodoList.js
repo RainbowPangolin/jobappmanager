@@ -1,9 +1,8 @@
 import {useState} from 'react';
 
 export default function TodoList(){
-
 	const [listItems, setListItems] = useState(testData);
-
+	
 	function handleListAddItem(newItem) {
 		setListItems((prevListItems) => {
 			return [...prevListItems, newItem];

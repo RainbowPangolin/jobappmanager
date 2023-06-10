@@ -51,7 +51,6 @@ const JobItemComponent = ({jobItem}) => {
 
 const JobStatusSelector = ({job}) => {
 	const cbList = useContext(CallbacksContext);
-
 	const setJobItemStatus = cbList.setJobItemStatus;
 
 	return(
@@ -77,9 +76,7 @@ const EditButton = ({toggleEdit, submitUpdate, children}) => {
 };
 
 const DeleteButton = ({submitDelete}) => {
-
 	const cbList = useContext(CallbacksContext);
-
 	const myDel = () => {
 		submitDelete.call();
 		cbList.deleteJobCallback.call();
@@ -97,7 +94,6 @@ const JobItemList = ({listOfJobs}) => {
 			<JobItemComponent key={item.id} jobItem={item}/>
 		));
     
-    
 		return(
 			<tbody>
 				{listItemsAsElements}
@@ -112,7 +108,6 @@ const JobItemList = ({listOfJobs}) => {
 
 const JobNoteExpander = () => {
 	return(
-		// <button type="submit">Job Note Expander</button>
 		<JobNotesDialogButton/>
 	);
 };

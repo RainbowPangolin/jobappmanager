@@ -1,9 +1,7 @@
 import { useRef, useEffect} from 'react';
 
 const Modal = ({isClosed, onClose, children}) => {
-
 	const modalRef = useRef(null);
-
 	const handleOutsideClick = (event) => {
 		if (modalRef.current.open) {
 			const dialogRect = modalRef.current.getBoundingClientRect();

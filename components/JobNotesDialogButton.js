@@ -5,7 +5,6 @@ import Modal from './Modal.js';
 export default function JobNotesDialogButton(){
 
 	const [closed, setClosed] = useState(true);
-
 	const openJobNotes = () => {
 		setClosed(false);
 	};
