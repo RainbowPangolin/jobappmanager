@@ -5,7 +5,6 @@ const localStorageMock = {
 	clear: () => {}
 };
 
-
 function getLocalStorage() {
 	if (typeof window !== 'undefined' && window.localStorage) {
 		return window.localStorage;
@@ -17,6 +16,19 @@ function getLocalStorage() {
 
 const localDb = getLocalStorage();
 const usedIds = new Set();
+
+export function getCurDate(){
+	let rawDate = new Date(Date.now());
+
+	let day = rawDate.getDate();
+	let month = rawDate.getMonth() + 1; // Months are zero-based, so we add 1
+	let year = rawDate.getFullYear();
+
+	// Formatting the date as "MM/DD/YYYY"
+	let formattedDate = `${month}/${day}/${year}`;
+
+	return formattedDate;
+}
 
 export function initializeUsedIds(listOfIds){
 	listOfIds.forEach((id) => {

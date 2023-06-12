@@ -5,7 +5,7 @@ import JobNotesDialogButton from './JobNotesDialogButton';
 import MiscOptions from './MiscOptions';
 
 const JobItemComponent = ({jobItem}) => {
-	//TODO Refactoring so that each job is within its own context might be smart? Not worth benchmarking in real life probably, but I'll put it as TODO
+	//TODO Refactoring so that each job is within its own context might be smart? TODO
     
 	const [editMode, setEditMode] = useState(false);
 	const [curJob, setCurJob] = useState(jobItem);
@@ -38,6 +38,7 @@ const JobItemComponent = ({jobItem}) => {
 					<td>{curJob.job_name}</td>
 					<td>{curJob.company}</td>
 					<td>{curJob.job_link}</td>
+					<td>{curJob.date_applied}</td>
 					<td><JobStatusSelector job={curJob}/></td>
 					<td><JobNoteExpander/></td>
 					<td><EditButton toggleEdit={toggleEdit}>Edit</EditButton></td>
@@ -143,7 +144,7 @@ const JobItemAdder = () => {
 			job_content:'',
 			job_link: link, 
 			app_status:'Unknown', 
-			date_applied:'TimestampTODO'
+			date_applied: db.getCurDate()
 		};
 		addJobCallback(newJob);
 		db.createJob(newJob);
