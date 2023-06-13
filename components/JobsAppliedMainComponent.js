@@ -4,10 +4,11 @@ import * as db from './utils/localDB';
 import JobNotesDialogButton from './JobNotesDialogButton';
 import MiscOptions from './MiscOptions';
 import Link from 'next/link';
+import * as jobSort from './utils/sortingFunctions';
 
 const JobItemComponent = ({jobItem}) => {
 	//TODO Refactoring so that each job is within its own context might be smart? TODO
-    
+	
 	const [editMode, setEditMode] = useState(false);
 	const [curJob, setCurJob] = useState(jobItem);
 	const toggleEdit = () => {
@@ -98,18 +99,21 @@ const DeleteButton = ({submitDelete}) => {
 	);
 };
 
-const JobItemList = ({listOfJobs}) => {
+const JobItemList = ({listOfJobs, sortingFunction}) => {
 	if(listOfJobs.length > 0){
-		const listItemsAsElements = listOfJobs.map((item) => (
+		const curSortingFunction = jobSort.getSortingFunction(sortingFunction);
+		const sortedListOfJobs = listOfJobs.sort(curSortingFunction);
+		const listItemsAsElements = sortedListOfJobs.map((item) => (
 			<JobItemComponent key={item.id} jobItem={item}/>
 		));
-    
+
 		return(
 			<tbody>
 				{listItemsAsElements}
 			</tbody>
 		);    
 	}
+	
 	return(
 		<tbody>
 		</tbody>
@@ -201,18 +205,25 @@ const JobItemAdder = () => {
 					<td><button type="submit" onClick={attemptAddJob}>Add Job</button></td>
 				</tr>
 			</tbody>
-            
+			
 		</table>
-        
+		
 	);
 };
 
+const SortingMethodSelector = ({onSortingFunctionChange}) => {
+	return(
+		<select type='radio' defaultValue='byId' onChange={onSortingFunctionChange}>
+			<option value="byId">by Id</option>
+			<option value="byIdReverse">Reverse Id</option>
+		</select>
+	);
+};
 
 export default function JobsAppliedMainComponent(){
 
 	const [listOfJobs, setListOfJobs] = useState([]);
-  
-
+	const [sortingFunction, setSortingFunction] = useState('byId');
 
 	useEffect(() => {
 		setListOfJobs(db.getList());
@@ -236,10 +247,16 @@ export default function JobsAppliedMainComponent(){
 		}
 	};
 
+	const onSortingFunctionChange = (event) => {
+		const sortingFunctionName = event.target.value;
+		setSortingFunction(sortingFunctionName);
+	};
+
 	return(
 		<CallbacksContext.Provider value={callbacks}>
 			<p> JobsAppliedMainComponent </p> 
 			<JobItemAdder/>
+			<SortingMethodSelector onSortingFunctionChange={onSortingFunctionChange}/>
 			<table>
 				<thead>
 					<tr>
@@ -256,9 +273,9 @@ export default function JobsAppliedMainComponent(){
 						<td>8</td>
 					</tr>
 				</thead>
-				<JobItemList listOfJobs={listOfJobs}/>
+				<JobItemList listOfJobs={listOfJobs} sortingFunction={sortingFunction}/>
 			</table>
-            
+			
 		</CallbacksContext.Provider>
 	);
 }
