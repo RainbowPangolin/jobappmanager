@@ -1,10 +1,9 @@
 import {useState, useContext, useEffect} from 'react';
 import { CallbacksContext } from './utils/CallbacksContexts';
 import * as db from './utils/localDB';
-import JobNotesDialogButton from './JobNotesDialogButton';
-import MiscOptions from './MiscOptions';
 import Link from 'next/link';
 import * as jobSort from './utils/sortingFunctions';
+import MiscOptionsDialog from './MiscOptionsDialog';
 
 const JobItemComponent = ({jobItem}) => {
 	//TODO Refactoring so that each job is within its own context might be smart? TODO
@@ -53,7 +52,6 @@ const JobItemComponent = ({jobItem}) => {
 					<td><JobNoteExpander/></td>
 					<td><EditButton toggleEdit={toggleEdit}>Edit</EditButton></td>
 					<td><DeleteButton submitDelete={submitDelete}/></td>
-					<td><MiscOptions/></td>
 				</>}
 
 		</tr>
@@ -122,7 +120,7 @@ const JobItemList = ({listOfJobs, sortingFunction}) => {
 
 const JobNoteExpander = () => {
 	return(
-		<JobNotesDialogButton/>
+		<MiscOptionsDialog/>
 	);
 };
 

@@ -1,11 +1,14 @@
+import JobDescriptionBox from './JobDescriptionBox';
+import CustomResumeBox from './CustomResumeBox';
+import CoverLetterBox from './CoverLetterBox';
 
 export default function JobNotesDialogScreen(){
 
 	return(
 		<>
-			<h2>Resume</h2>
-			<h2>Cover Letter</h2>
-			<h2>Job Description</h2>
+			<CustomResumeBox/>
+			<CoverLetterBox/>
+			<JobDescriptionBox/>
 		</>
 	);
 }

@@ -1,8 +1,11 @@
 export default function JobDescriptionBox(){
 	return(
-		<text>
-			Job description
-		</text>
+		<>
+			<h2>Job Description</h2>
+			<input >
+				
+			</input>
+		</>
 	);
 
 }
