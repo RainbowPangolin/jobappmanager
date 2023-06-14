@@ -1,7 +1,9 @@
+import {JobDescriptionBox} from 'JobDescriptionBox.js';
+
 export default function MiscOptions(){
 	return(
 		<div>
-			<p> dot dot dot </p>
+			<JobDescriptionBox/>
 		</div>
 	);
 
