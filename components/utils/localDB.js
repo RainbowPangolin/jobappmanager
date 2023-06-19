@@ -1,3 +1,5 @@
+import * as datetime from './dateUtils.js';
+
 const localStorageMock = {
 	setItem: () => {},
 	getItem: () => {return null;},
@@ -19,13 +21,7 @@ const usedIds = new Set();
 
 export function getCurDate(){
 	let rawDate = new Date(Date.now());
-
-	let day = rawDate.getDate();
-	let month = rawDate.getMonth() + 1; // Months are zero-based, so we add 1
-	let year = rawDate.getFullYear();
-
-	// Formatting the date as "MM/DD/YYYY"
-	let formattedDate = `${month}/${day}/${year}`;
+	const formattedDate = datetime.parseDate(rawDate);
 
 	return formattedDate;
 }
@@ -117,16 +113,41 @@ export function deleteJob(id){
 }
 
 export function getActivityTracker(){
-	let curTracker = localDb.getItem('checkInTracker');
+	let curTracker = localDb.getItem('activityTracker');
 	return curTracker;
 }
 
 export function checkIn(){
-	let curTracker = localDb.getItem('checkInTracker');
+	const todaysDate = datetime.getDayNoTime();
+
+	const storedJsonMap = localStorage.getItem('activityTracker'); // Retrieve the JSON string from localStorage
+
+	let curTracker;
+	if (storedJsonMap) {
+		const parsedArray = JSON.parse(storedJsonMap);
+		curTracker = new Map(parsedArray);
+	} else {
+		curTracker = new Map(); // Create an empty Map if no stored data is found
+	}
+
 	try{
-		localDb.setItem('activityTracker', String(curTracker + 1));
-	} catch (e){
+		const todaysTrackedActivity = curTracker.get(todaysDate);
+		if(todaysTrackedActivity){
+			const tdaysCount = curTracker.get(todaysDate);
+			curTracker.set(todaysDate, tdaysCount + 1);
+			const mapAsArray = Array.from(curTracker);
+			const jsonMap = JSON.stringify(mapAsArray);
+			localDb.setItem('activityTracker', jsonMap);	
+		} else {
+			curTracker.set(todaysDate, 1);
+			const mapAsArray = Array.from(curTracker);
+			const jsonMap = JSON.stringify(mapAsArray);
+			localDb.setItem('activityTracker', jsonMap);	
+		}	
+	}catch (e){
 		console.error(e);
 	}
+
+
 }
 

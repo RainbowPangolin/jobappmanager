@@ -4,6 +4,7 @@ import * as db from './utils/localDB';
 import Link from 'next/link';
 import * as jobSort from './utils/sortingFunctions';
 import MiscOptionsDialog from './MiscOptionsDialog';
+import { submitActivity } from './utils/DailyCheckinListener';
 
 const JobItemComponent = ({jobItem}) => {
 	//TODO Refactoring so that each job is within its own context might be smart? TODO
@@ -176,6 +177,7 @@ const JobItemAdder = () => {
 			}
 			addJobCallback(newJob);
 			db.createJob(newJob);
+			submitActivity();
 		} catch (e) {
 			alert(e);
 		}
