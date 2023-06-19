@@ -116,5 +116,17 @@ export function deleteJob(id){
 	localDb.setItem('jobList', JSON.stringify(newJobsList));
 }
 
+export function getActivityTracker(){
+	let curTracker = localDb.getItem('checkInTracker');
+	return curTracker;
+}
 
+export function checkIn(){
+	let curTracker = localDb.getItem('checkInTracker');
+	try{
+		localDb.setItem('activityTracker', String(curTracker + 1));
+	} catch (e){
+		console.error(e);
+	}
+}
 
