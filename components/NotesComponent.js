@@ -4,5 +4,4 @@ export default function NotesComponent(){
 			<p> NotesComponent </p>
 		</div>
 	);
-
 }
