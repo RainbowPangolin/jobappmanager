@@ -21,6 +21,8 @@ export default function MainPage(){
 					Download Job Applications Backup
 				</Components.DownloadDataButton>
 			</div>
+
+			<Components.DailyActivityLog/>
 		</div>
 	);
 }
