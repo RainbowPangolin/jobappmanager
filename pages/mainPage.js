@@ -14,14 +14,12 @@ export default function MainPage(){
 				<Components.ReferencesSheet/>
 				<Components.NotesComponent/>
 			</div>
-
 			<div>
 				<Components.JobsAppliedMainComponent/>
 				<Components.DownloadDataButton dataKey={'jobList'}>
 					Download Job Applications Backup
 				</Components.DownloadDataButton>
 			</div>
-
 			<Components.DailyActivityLog/>
 		</div>
 	);
