@@ -165,6 +165,8 @@ const JobItemAdder = () => {
 			job_name: jobName, 
 			company: company, 
 			job_content:'',
+			job_coverletter:'',
+			job_resume:'',
 			job_link: link, 
 			app_status:'Unknown', 
 			date_applied: db.getCurDate()
