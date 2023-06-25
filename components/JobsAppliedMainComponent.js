@@ -6,6 +6,8 @@ import * as jobSort from './utils/sortingFunctions';
 import MiscOptionsDialog from './MiscOptionsDialog';
 import { submitActivity } from './utils/DailyCheckinListener';
 
+
+//TODO Onload, fire a checkin event for opening up app
 const JobItemComponent = ({jobItem}) => {
 	//TODO Refactoring so that each job is within its own context might be smart? TODO
 	
@@ -125,6 +127,7 @@ const JobNoteExpander = () => {
 	);
 };
 
+// TODO- Mark as checkin eligible operation
 const JobItemAdder = () => {
 	const cbList = useContext(CallbacksContext);
 	const addJobCallback = cbList.addJobCallback;
