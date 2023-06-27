@@ -1,11 +1,33 @@
+/* eslint-disable */
+
 import * as db from './utils/localDB';
+import {useState} from 'react';
+
+const ActivityTile = ({checkins}) => {
+	checkins.forEach((checkin) => {
+		
+	});
+}
 
 export default function DailyActivityLog(){
 	
 	//Get DAL data
 	let importedTracker = db.getActivityTracker();
+	//Might need to be an effect
 	console.log(importedTracker);
 	//Generate table based on queried state
+
+	const [numDays, setNumDays] = useState[60];
+	const trackerPastDays = []; 
+	
+
+	for(let i = 0; i < numDays; i++){
+		//get Current Date based on my custom util function
+		//get current date - i
+		//if that date is in my tracker, push to front
+		//if not, push empty ActivityTile
+	}
+
 	//generate table of last 60 (variable) days
 	//Filter data to past 60 days
 	
