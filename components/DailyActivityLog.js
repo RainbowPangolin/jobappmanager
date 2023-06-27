@@ -3,10 +3,17 @@
 import * as db from './utils/localDB';
 import {useState} from 'react';
 
-const ActivityTile = ({checkins}) => {
-	checkins.forEach((checkin) => {
-		
+const ActivityTile = ({dayObject}) => {
+	const poo = [];
+	dayObject.forEach((checkin) => {
+		poo.push(checkin)
 	});
+
+	return(
+		<>
+			{poo}
+		</>
+	)
 }
 
 export default function DailyActivityLog(){
@@ -17,7 +24,7 @@ export default function DailyActivityLog(){
 	console.log(importedTracker);
 	//Generate table based on queried state
 
-	const [numDays, setNumDays] = useState[60];
+	const [numDays, setNumDays] = useState(60);
 	const trackerPastDays = []; 
 	
 
@@ -28,6 +35,7 @@ export default function DailyActivityLog(){
 		//if not, push empty ActivityTile
 	}
 
+	let test = ActivityTile({dayObject: [1,2,3]});
 	//generate table of last 60 (variable) days
 	//Filter data to past 60 days
 	
