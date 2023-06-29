@@ -52,7 +52,7 @@ const JobItemComponent = ({jobItem}) => {
 					<td><Link href={curJob.job_link}>{formatUrl(curJob.job_link)}</Link></td>
 					<td>{curJob.date_applied}</td>
 					<td><JobStatusSelector job={curJob}/></td>
-					<td><JobNoteExpander/></td>
+					<td><JobNoteExpander job={curJob}/></td>
 					<td><EditButton toggleEdit={toggleEdit}>Edit</EditButton></td>
 					<td><DeleteButton submitDelete={submitDelete}/></td>
 				</>}
@@ -121,9 +121,9 @@ const JobItemList = ({listOfJobs, sortingFunction}) => {
 	);   
 };
 
-const JobNoteExpander = () => {
+const JobNoteExpander = ({job}) => {
 	return(
-		<MiscOptionsDialog/>
+		<MiscOptionsDialog data={job}/>
 	);
 };
 

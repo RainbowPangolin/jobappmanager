@@ -16,11 +16,11 @@ export default function MainPage(){
 			</div>
 			<div>
 				<Components.JobsAppliedMainComponent/>
-				<Components.DownloadDataButton dataKey={'jobList'}>
+				{/* <Components.DownloadDataButton dataKey={'jobList'}>
 					Download Job Applications Backup
-				</Components.DownloadDataButton>
+				</Components.DownloadDataButton> */}
 			</div>
-			<Components.DailyActivityLog/>
+			{/* <Components.DailyActivityLog/> */}
 		</div>
 	);
 }
