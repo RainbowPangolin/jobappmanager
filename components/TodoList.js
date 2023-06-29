@@ -55,12 +55,12 @@ function TodoItemAdder({
 }){
 
 	const [itemTitle, setItemTitle] = useState('');
-	const [itemDesc, setItemDesc] = useState('');
+	// const [itemDesc, setItemDesc] = useState('');
 
 	let newItem = {
 		id: numItemsInList,
 		title: itemTitle,
-		description: itemDesc,
+		// description: itemDesc,
 		timestamp: 'timestamp2',
 		isdone: true
 	};
@@ -75,14 +75,14 @@ function TodoItemAdder({
 						setItemTitle(event.target.value); 
 					}
 				}></input>
-			<input 
+			{/* <input 
 				id="description"
 				value={itemDesc}
 				onChange={
 					(event) => {
 						setItemDesc(event.target.value); 
 					}
-				}></input>
+				}></input> */}
 			<button onClick={() => {itemAdder(newItem);}}>ADD ITEM</button>
 		</>
 	);
@@ -145,12 +145,13 @@ function TodoItem({
 						/>
 					</>:
 					<span>
+						<SetIsDoneButton/>
+
 						{item.title}, 
-						{item.description}, 
+						{/* {item.description},  */}
 						{item.timestamp},
 						<EditButton setEditModeHandler={setEditMode}/>
 						<DeleteButton handleDeleteCallback={handleDeleteCallback}/>
-						<SetIsDoneButton/>
 					</span>
 			}
             
