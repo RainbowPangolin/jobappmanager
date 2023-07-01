@@ -1,4 +1,7 @@
-export default function CustomResumeBox(){
+/* eslint-disable */
+
+
+export default function CustomResumeBox({resumeLink}){
 	return(
 		<>
 			<h2>Resume</h2>

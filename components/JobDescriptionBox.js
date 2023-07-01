@@ -1,4 +1,7 @@
-export default function JobDescriptionBox(){
+/* eslint-disable */
+
+
+export default function JobDescriptionBox({jobDescription}){
 	return(
 		<>
 			<h2>Job Description</h2>
