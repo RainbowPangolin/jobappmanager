@@ -6,7 +6,7 @@ export function submitActivity(){
 
 	let today = null;
 
-	if ( false ) {//checkedInOn(today)){
+	if ( false ) { //checkedInOn(today)){
 		return;
 	} else{
 		db.checkIn();
