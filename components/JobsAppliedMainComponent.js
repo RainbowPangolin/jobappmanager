@@ -147,6 +147,7 @@ const JobItemAdder = () => {
 		setLink(event.target.value);
 	};
 
+	//TODO Use url library instead
 	const isInvalidUrl = (url) => {
 		// Regular expression pattern for URL validation
 		let urlPattern = /^(?:https?:\/\/)?(?:www\.)?[^\s.]+\.[^\s]{2,}$/i;
