@@ -1,6 +1,6 @@
-import JobDescriptionBox from './JobDescriptionBox';
-import CustomResumeBox from './CustomResumeBox';
-import CoverLetterBox from './CoverLetterBox';
+import JobDescriptionBox from '../joblistcomponent/JobDescriptionBox';
+import CustomResumeBox from '../joblistcomponent/CustomResumeBox';
+import CoverLetterBox from '../joblistcomponent/CoverLetterBox';
 
 export default function JobNotesDialogScreen({job}){
 	

@@ -1,10 +1,10 @@
 import {useState, useContext, useEffect} from 'react';
-import { CallbacksContext } from './utils/CallbacksContexts';
-import * as db from './utils/localDB';
+import { CallbacksContext } from '../utils/CallbacksContexts';
+import * as db from '../utils/localDB';
 import Link from 'next/link';
-import * as jobSort from './utils/sortingFunctions';
-import MiscOptionsDialog from './MiscOptionsDialog';
-import { submitActivity } from './utils/DailyCheckinListener';
+import * as jobSort from '../utils/sortingFunctions';
+import MiscOptionsDialog from '../common/MiscOptionsDialog';
+import { submitActivity } from '../utils/DailyCheckinListener';
 
 
 //TODO Onload, fire a checkin event for opening up app
