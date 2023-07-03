@@ -1,4 +1,4 @@
-import * as db from './/utils/localDB.js';
+import * as db from '../utils/localDB.js';
 
 export default function DownloadDataButton({dataKey, children}){
 

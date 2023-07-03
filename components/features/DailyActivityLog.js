@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import * as db from './utils/localDB';
+import * as db from '../utils/localDB';
 import {useState} from 'react';
 
 const ActivityTile = ({dayObject}) => {
