@@ -2,9 +2,9 @@
 
 ## A React app to sort, manage, and track a job seeker's applications. 
 
-The latest deployment can be found at https://tritris-4btnjlmuaq-uc.a.run.app/
+The latest deployment can be found at https://jobappmanager.vercel.app/ 
 
-[Report Issues](https://github.com/RainbowPangolin/tritris/issues)
+[Report Issues](https://github.com/RainbowPangolin/jobappmanager/issues)
 
 [Feedback](mailto:kktsou@ucsd.edu)
 
