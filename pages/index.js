@@ -19,7 +19,7 @@ export default function Home() {
 			</main>
 
 			<footer>
-				<p>By Polterheist</p>
+				<p>By RainbowPangolin</p>
 			</footer>
 
 			{/* eslint-disable-next-line */}
